@@ -39,9 +39,9 @@ def get_default_configuration():
     return default_configuration
 
 
-def get_rmq_connection():
+def get_rmq_connection(ip):
     try:
-        connection = pika.BlockingConnection(pika.ConnectionParameters('rabbitmq'))
+        connection = pika.BlockingConnection(pika.ConnectionParameters(ip))
         channel = connection.channel()
         channel.exchange_declare(exchange='image_pipeline', exchange_type='direct', durable=True)
         return channel
@@ -214,7 +214,7 @@ class CaptureWorker(Thread):
             self.is_closed = True
 
 
-def main(devices=[]):
+def main(ip, devices=[]):
     global graceful_signal_to_kill
     available_devices = glob.glob('/dev/waggle_cam_*')
 
@@ -244,7 +244,7 @@ def main(devices=[]):
     command = ['arp -a 10.31.81.10 | awk \'{print $4}\' | sed \'s/://g\'']
     node_id = str(subprocess.getoutput(command))
 
-    rmq_channel = get_rmq_connection()
+    rmq_channel = get_rmq_connection(ip)
     if rmq_channel is None:
         print('Could not connect to RabbitMQ!')
         exit(1)
@@ -315,7 +315,7 @@ def sigterm_handler(signum, frame):
 if __name__ == '__main__':
     signal.signal(signal.SIGTERM, sigterm_handler)
     if len(sys.argv) >= 2:
-        main(sys.argv[1:])
+        main(sys.argv[2], sys.argv[1:])
     else:
         print('No target device is specified. Exiting...')
         exit(1)
