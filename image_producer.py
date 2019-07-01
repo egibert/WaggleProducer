@@ -316,7 +316,7 @@ def sigterm_handler(signum, frame):
 if __name__ == '__main__':
     signal.signal(signal.SIGTERM, sigterm_handler)
     if len(sys.argv) >= 2:
-        main("172.18.0.2", sys.argv[1:])
+        main(sys.argv[2], sys.argv[1:])
     else:
         print('No target device is specified. Exiting...')
         exit(1)
