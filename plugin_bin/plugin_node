@@ -157,7 +157,7 @@ class CarPedDetector(object):
 
         while True:
             current_time = time.time()
-	    print ("Recived frame: " + current_time)
+            print ("Recived frame: " + current_time)
 
             if current_time - self.config['last_updated'] > 3:
                 return_code, message = self.input_handler.read()
@@ -209,7 +209,7 @@ class CarPedDetector(object):
 
                     print('cars={} pedestrians={}'.format(
                         count_car, count_person))
-		    print ("Done Computing: " + time.time())
+                    print ("Done Computing: " + time.time())
                     """
                     plugin.add_measurement({
                         'sensor_id': 1000,
