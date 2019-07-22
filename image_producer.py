@@ -245,6 +245,8 @@ def main(ip, devices=[]):
     command = ['arp -a 10.31.81.10 | awk \'{print $4}\' | sed \'s/://g\'']
     node_id = str(subprocess.getoutput(command))
 
+    rmq_channel = get_rmq_connection(ip)
+
     while rmq_channel == None:
         rmq_channel = get_rmq_connection(ip)
         time.sleep(1)
