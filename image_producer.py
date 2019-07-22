@@ -50,7 +50,7 @@ def get_rmq_connection(ip):
 
 
 def send_to_rmq(channel, frame, timestamp, config):
-    print("Sending: " + time.time())
+    #print("Sending: " + time.time())
     headers = {
         'node_id': config['node_id'],
         'image_width': config['width'],

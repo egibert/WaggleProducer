@@ -73,7 +73,7 @@ class CarPedDetector(object):
         #super().__init__()
         self.config = self._get_config_table()
         self.input_handler = ImagePipelineHandler(
-            routing_in=self.config['source'], url='amqp://172.18.0.2')
+            routing_in=self.config['source'], url='amqp://wa8g')
 
     def _get_config_table(self):
         try:
@@ -157,7 +157,7 @@ class CarPedDetector(object):
 
         while True:
             current_time = time.time()
-            print ("Recived frame: " + current_time)
+            #print ("Recived frame: " + current_time)
 
             if current_time - self.config['last_updated'] > 3:
                 return_code, message = self.input_handler.read()
@@ -209,7 +209,7 @@ class CarPedDetector(object):
 
                     print('cars={} pedestrians={}'.format(
                         count_car, count_person))
-                    print ("Done Computing: " + time.time())
+                    #print ("Done Computing: " + time.time())
                     """
                     plugin.add_measurement({
                         'sensor_id': 1000,
