@@ -245,10 +245,12 @@ def main(ip, devices=[]):
     command = ['arp -a 10.31.81.10 | awk \'{print $4}\' | sed \'s/://g\'']
     node_id = str(subprocess.getoutput(command))
 
-    rmq_channel = get_rmq_connection(ip)
-    if rmq_channel is None:
-        print('Could not connect to RabbitMQ!')
-        exit(1)
+    while rmq_channel == None:
+        rmq_channel = get_rmq_connection(ip)
+        time.sleep(1)
+#    if rmq_channel is None:
+#        print('Could not connect to RabbitMQ!')
+#        exit(1)
 
     cam_capture = {}
     for camera_device in camera_devices:
