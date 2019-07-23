@@ -12,6 +12,7 @@ import json
 import cv2
 import numpy as np
 import sys
+import time
 
 from waggle.pipeline import ImagePipelineHandler
 #from waggle.pipeline import Plugin, ImagePipelineHandler
@@ -72,6 +73,7 @@ class CarPedDetector(object):
     def __init__(self):
         #super().__init__()
         self.config = self._get_config_table()
+	time.sleep(4)
         self.input_handler = ImagePipelineHandler(
             routing_in=self.config['source'], url='amqp://wa8g')
 
