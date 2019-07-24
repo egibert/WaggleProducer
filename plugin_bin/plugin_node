@@ -73,7 +73,7 @@ class CarPedDetector(object):
     def __init__(self):
         #super().__init__()
         self.config = self._get_config_table()
-        time.sleep(4)
+        time.sleep(8)
         self.input_handler = ImagePipelineHandler(
             routing_in=self.config['source'], url='amqp://wa8g')
 
